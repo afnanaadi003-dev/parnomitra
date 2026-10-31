@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parno Mittra | Filmic Cosmos & Archive</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        charcoal: {
+                            800: '#18181b',
+                            900: '#0f0f11',
+                            950: '#070709',
+                        },
+                        crimson: {
+                            700: '#9f1239',
+                            800: '#881337',
+                            900: '#4c0519',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Glassmorphic utilities */
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+        }
+        .glass-card {
+            background: rgba(30, 30, 35, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.8), 0 0 20px 2px rgba(217, 119, 6, 0.15);
+        }
+        .gold-glow {
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.35);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+    </style>
+</head>
+<body class="bg-charcoal-950 text-zinc-300 font-sans selection:bg-gold-500 selection:text-charcoal-950 overflow-x-hidden">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-gold-500/10">
+        <div class="max-w-7xl mx-mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-600 to-crimson-700 flex items-center justify-center font-serif text-white font-bold text-xl shadow-lg">
+                        PM
+                    </div>
+                    <a href="#hero" class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white">
+                        PARNO <span class="gold-gradient-text">MITTRA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#bio" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Biography</a>
+                    <a href="#featured" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Featured Cinema</a>
+                    <a href="#filmography" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Filmography</a>
+                    <a href="#philosophy" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Philosophy & Mind</a>
+                    <a href="#activism" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Liberalism & Social</a>
+                    <a href="#philanthropy" class="hover:text-gold-400 transition-colors py-1 border-b-2 border-transparent hover:border-gold-400">Legacy</a>
+                </nav>
+
+                <!-- Action Button & Mobile menu toggle -->
+                <div class="flex items-center gap-4">
+                    <a href="#quote-generator" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-500/30 bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 text-xs font-semibold tracking-wider uppercase transition-all">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Mind Quotes
+                    </a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-charcoal-900 border-b border-zinc-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#bio" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Biography</a>
+            <a href="#featured" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Featured Cinema</a>
+            <a href="#filmography" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Filmography</a>
+            <a href="#philosophy" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Philosophy & Mind</a>
+            <a href="#activism" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Liberalism & Justice</a>
+            <a href="#philanthropy" class="mobile-nav-link block px-3 py-2 rounded-md hover:bg-zinc-800 hover:text-gold-400">Legacy & Philanthropy</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="pt-20">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16">
+            <!-- Ambient Background Glows -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-crimson-800/15 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Info -->
+                    <div class="lg:col-span-7 space-y-8 text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-mono uppercase tracking-widest">
+                            <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+                            Cinema • Philosophy • Cultural Icon
+                        </div>
+
+                        <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                            PARNO <br>
+                            <span class="gold-gradient-text gold-glow">MITTRA</span>
+                        </h1>
+
+                        <!-- Signature Philosophy Slogan Banner -->
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-gold-500 relative shadow-2xl">
+                            <i data-lucide="quote" class="absolute right-4 bottom-4 w-12 h-12 text-zinc-800 pointer-events-none"></i>
+                            <p class="font-serif italic text-lg sm:text-xl text-gold-200 leading-relaxed">
+                                "You don't just show; telling your smartness is through the depth of your mind and thoughts."
+                            </p>
+                            <span class="block mt-3 text-xs uppercase tracking-widest text-zinc-400 font-semibold">— Parno's Core Mind Mantra</span>
+                        </div>
+
+                        <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+                            An archive celebrating an actress of fierce intelligence, raw vulnerability, bohemian elegance, and unwavering dedication to social justice, filmic innovation, and human dignity.
+                        </p>
+
+                        <!-- Key Metadata Counters -->
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-800/80">
+                            <div class="text-center sm:text-left">
+                                <span class="font-serif text-3xl sm:text-4xl font-bold text-white block">35+</span>
+                                <span class="text-xs uppercase tracking-wider text-zinc-400">Cinematic Projects</span>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <span class="font-serif text-3xl sm:text-4xl font-bold text-white block">National</span>
+                                <span class="text-xs uppercase tracking-wider text-zinc-400">Acclaimed Debut</span>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <span class="font-serif text-3xl sm:text-4xl font-bold text-white block">15+ Yrs</span>
+                                <span class="text-xs uppercase tracking-wider text-zinc-400">Artistic Legacy</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Actions -->
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="#bio" class="px-6 py-3 rounded-full bg-gradient-to-r from-gold-600 to-gold-500 text-charcoal-950 font-bold hover:shadow-lg hover:shadow-gold-500/20 transition-all flex items-center gap-2">
+                                Read Full Bio <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#featured" class="px-6 py-3 rounded-full bg-zinc-900 border border-zinc-700 hover:border-gold-400 text-white font-medium transition-all flex items-center gap-2">
+                                Explore Featured Films <i data-lucide="film" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Showcase / Poster Card -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <!-- Film Reel Frame Effect -->
+                            <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-gold-500 to-crimson-700 blur opacity-30"></div>
+                            
+                            <div class="relative glass-card rounded-3xl overflow-hidden p-3 border border-gold-500/30">
+                                <div class="relative h-[480px] rounded-2xl overflow-hidden bg-charcoal-900 flex flex-col justify-end p-6">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+                                         alt="Parno Mittra Portrait Concept" 
+                                         class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700 hover:scale-105"
+                                         onerror="this.src='https://placehold.co/600x800/18181b/fbbf24?text=Parno+Mittra+Portrait'">
+                                    
+                                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent"></div>
+                                    
+                                    <div class="relative z-10 space-y-2">
+                                        <span class="inline-block px-2.5 py-1 rounded bg-crimson-900/80 text-crimson-200 text-xs font-mono uppercase tracking-widest border border-crimson-700/50">
+                                            Nehemian Film Icon
+                                        </span>
+                                        <h3 class="font-serif text-2xl text-white font-bold">Parno Mittra</h3>
+                                        <p class="text-xs text-zinc-300 font-light">"An actor is not a mannequin; we are vessels for the unspoken chaos and beauty of the mortal soul."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. BIOGRAPHY SECTION (~1000 Words Narrative Flow) -->
+        <section id="bio" class="py-24 bg-charcoal-900/80 border-y border-zinc-800 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center space-y-4 mb-16">
+                    <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">The Odyssey of an Artist</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Biographical Narrative & Heritage</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-gold-500 to-crimson-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Left Sidebar Info Card -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="glass-panel p-6 rounded-2xl space-y-6 border border-gold-500/20">
+                            <h3 class="font-serif text-xl font-bold text-gold-300 border-b border-zinc-800 pb-3">Quick Facts</h3>
+                            
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <span class="text-xs text-zinc-400 block uppercase tracking-wider">Full Name</span>
+                                    <span class="text-white font-medium">Parno Mittra (পার্নো মিত্র)</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-zinc-400 block uppercase tracking-wider">Hometown & Roots</span>
+                                    <span class="text-white font-medium">Kolkata, West Bengal, India</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-zinc-400 block uppercase tracking-wider">Breakthrough Film</span>
+                                    <span class="text-white font-medium">Ranjana Ami Ar Ashbona (2011)</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-zinc-400 block uppercase tracking-wider">Notable Honors</span>
+                                    <span class="text-white font-medium">National Film Award Feature Ensemble, Best Debut Nominations & Critic Praise</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-zinc-400 block uppercase tracking-wider">Passions & Hobbies</span>
+                                    <span class="text-white font-medium">Literature, Traveling, Pet Welfare, Cinema Studies, Interior Aesthetics</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quote Box -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-crimson-950/40 to-charcoal-900 border border-crimson-800/30">
+                            <p class="font-serif italic text-sm text-zinc-300">
+                                "Kolkata isn't just a city to me; it's a breathing entity of art, rain, yellow taxis, and poetry that lives inside my bloodstream."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Main Bio Text -->
+                    <div class="lg:col-span-8 space-y-6 text-zinc-300 leading-relaxed text-base sm:text-lg font-light text-justify">
+                        
+                        <p>
+                            <span class="text-3xl font-serif font-bold text-gold-400 float-left mr-3 leading-none">P</span>arno Mittra stands as one of the most intellectually compelling, emotionally versatile, and culturally resonant performers in modern Bengali cinema. Born and raised amidst the vibrant, rain-soaked streets and rich intellectual tapestry of Kolkata, West Bengal, Parno’s journey into the performing arts began not as a engineered pursuit of fame, but as an authentic expression of an inquisitive mind drawn to the nuances of human emotion.
+                        </p>
+
+                        <h3 class="font-serif text-2xl text-white font-semibold pt-4 text-left border-b border-zinc-800 pb-2">The Television Prelude & National Breakthrough</h3>
+                        <p>
+                            Before conquering the silver screen, Parno captivated audience households with her extraordinary screen presence in iconic Bengali television sagas such as <em>Khela</em> and <em>Bou Kotha Kao</em>. Her ability to convey deep vulnerability without dramatic excess quickly caught the eye of legendary auteur Anjan Dutt. 
+                        </p>
+                        <p>
+                            In 2011, Parno made her monumental feature film debut in <strong>Ranjana Ami Ar Ashbona</strong>. Playing the central titular role of Ranjana—a headstrong, passionate young woman navigating the chaotic world of Bengali rock music, love, and identity—Parno delivered a performance so raw and uninhibited that it redefined female debuts in contemporary Indian cinema. The film went on to win three National Film Awards, instantly establishing Parno as an powerhouse capable of carrying complex narrative weight.
+                        </p>
+
+                        <h3 class="font-serif text-2xl text-white font-semibold pt-4 text-left border-b border-zinc-800 pb-2">Cinematic Versatility & Filmic Mastery</h3>
+                        <p>
+                            Following her historic debut, Parno consciously avoided typecasting. She actively sought out roles that challenged conventional tropes of Indian heroines. In Kaushik Ganguly's critically acclaimed thriller <strong>Chotushkone</strong> (2014), she effortlessly blended into an ensemble of legendary cinema figures, portraying nuanced layers of suspense and human frailties.
+                        </p>
+                        <p>
+                            Her performance in Pratim D. Gupta’s <strong>Ahare Mon</strong> (2018) and <strong>Machher Jhol</strong> highlighted her exquisite comic timing, warmth, and grounded realism. Whether embodying a fierce woman in Srijit Mukherji’s partition drama <strong>Rajkahini</strong> (2015) or tackling complex human relationships in <strong>Apur Panchali</strong> (2013), Parno’s filmography is a testament to her philosophy: acting is an architectural endeavor of love, passion, and genuine human empathy.
+                        </p>
+
+                        <h3 class="font-serif text-2xl text-white font-semibold pt-4 text-left border-b border-zinc-800 pb-2">Politics, Liberalism & Public Discourse</h3>
+                        <p>
+                            Beyond the silver screen, Parno Mittra has emerged as a articulate public figure and socio-political voice. Entering public service and politics with a dedication to West Bengal’s grassroots development, she has consistently championed the rights of women, the artistic community, and underprivileged citizens. 
+                        </p>
+                        <p>
+                            Parno’s stance on world affairs reflects a high-quality global liberalism—one that rejects dogmatism in favor of empathetic dialogue, body positivity, mental health awareness, and absolute artistic freedom. In an era often dominated by superficiality, her public discourse remains grounded in intellectual depth: <em class="text-gold-300">"Smartness is not a visual costume; it is the quality of your thoughts."</em>
+                        </p>
+
+                        <h3 class="font-serif text-2xl text-white font-semibold pt-4 text-left border-b border-zinc-800 pb-2">Personal Musings: Nature, Literature & Soul</h3>
+                        <p>
+                            In her private life, Parno remains deeply connected to village nature, quiet rivers, classical Bengali music, and international literature. An avid reader, her aesthetic world is influenced by authors and thinkers who question existential mortality and celebrate the quiet beauty of everyday life. She views nature as the ultimate spiritual equalizer—a sanctuary where the noise of fame subsides into pure creation.
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. FEATURED FILMS SHOWCASE (5 Landmark Films with Interactive Modals) -->
+        <section id="featured" class="py-24 bg-charcoal-950 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">Iconic Performances</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">5 Featured Masterpieces</h2>
+                    </div>
+                    <p class="text-zinc-400 text-sm max-w-md mt-4 md:mt-0">
+                        Click on any film card to open the detailed cinematic dossier, character study, and filmic theme analysis.
+                    </p>
+                </div>
+
+                <!-- 5 Featured Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6" id="featured-films-container">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. COMPLETE FILMOGRAPHY & FILTERABLE GRID -->
+        <section id="filmography" class="py-24 bg-charcoal-900 border-t border-zinc-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center space-y-4 mb-12">
+                    <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">Comprehensive Archive</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">The Filmic Universe & Legacy</h2>
+                    <p class="text-zinc-400 text-sm max-w-2xl mx-auto">
+                        Explore Parno Mittra’s extensive body of work spanning cinema, web series, television classics, and award-winning short films.
+                    </p>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-buttons">
+                    <button data-filter="all" class="film-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-gold-500 text-charcoal-950 shadow-lg">
+                        All Projects
+                    </button>
+                    <button data-filter="Feature Film" class="film-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
+                        Feature Films
+                    </button>
+                    <button data-filter="Web Series" class="film-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
+                        Web Series
+                    </button>
+                    <button data-filter="Television" class="film-filter-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-zinc-800 text-zinc-300 hover:bg-zinc-700">
+                        Television Classics
+                    </button>
+                </div>
+
+                <!-- Film Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="full-filmography-grid">
+                    <!-- JS populated -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. PARNO'S FILM PHILOSOPHY & INTELLECTUAL COSMOS -->
+        <section id="philosophy" class="py-24 bg-charcoal-950 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <div class="text-center space-y-4 mb-16">
+                    <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">Intellectual Cosmos</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Film Philosophy & Mortal Realism</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-gold-500 to-crimson-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Mortal & Morality Unicorns -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">Mortal & Morality Unicorns</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Cinema often chases mythical morality, but Parno advocates for "mortal realism"—characters flawed by grief, hunger, ambition, and instinct. Art should not act as a sterile sanctuary, but as a living canvas for human mortality.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Against Famine & Body Shaming -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-crimson-500/10 border border-crimson-500/30 flex items-center justify-center text-crimson-400">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">Social Stigmas & Body Positivity</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            A fierce defender of body autonomy and mental health transparency. Parno dismantles aesthetic perfectionism, promoting authentic self-love over industry-imposed body shaming and cultural conditioning.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: The Tiramisu Concept -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">Timeless Wisdom on Modern Trays</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Her signature artistic principle: serving timeless, ancient messages of human compassion like a modern tiramisu—sophisticated, layered, accessible, yet deeply rooted in traditional structural integrity.
+                        </p>
+                    </div>
+
+                    <!-- Card 4: Global Liberalism & World Chaos -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">High-Quality Liberalism</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            In a world torn by war, crime, and dogma, Parno champions a liberalism that isn't superficial performativity, but an active, empathetic commitment to fundamental human dignity and open dialogue.
+                        </p>
+                    </div>
+
+                    <!-- Card 5: Mind & Body Harmony -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-crimson-500/10 border border-crimson-500/30 flex items-center justify-center text-crimson-400">
+                            <i data-lucide="heart" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">Reconciling Mind & Body</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Resolving the inner two-state conflict between physical urges and intellectual aspirations. Art serves as the bridge that unites physical presence with transcendental consciousness.
+                        </p>
+                    </div>
+
+                    <!-- Card 6: The Bohemian Spirit -->
+                    <div class="glass-panel p-8 rounded-2xl border border-gold-500/20 space-y-4 hover:border-gold-400 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i data-lucide="feather" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white">The Stupidity of Being</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Embracing the bohemian freedom to fail, laugh, and be imperfect. True sophistication lies in discarding pretense and celebrating the unvarnished silliness and vulnerability of existence.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. SEXISM, LIBERALISM & SOCIAL JUSTICE -->
+        <section id="activism" class="py-24 bg-charcoal-900 border-t border-zinc-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-crimson-400 text-xs font-mono tracking-widest uppercase">Social Justice & Advocacy</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white leading-tight">
+                            Standing Against Sexism & Systemic Bias
+                        </h2>
+                        <p class="text-zinc-300 leading-relaxed text-base sm:text-lg font-light">
+                            Parno Mittra has consistently been one of the most courageous voices in Indian media regarding gender parity, pay equity, and mental well-being. She openly addresses the casual sexism pervasive in entertainment and society.
+                        </p>
+                        
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-charcoal-950 border border-zinc-800">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Challenging Patriarchal Cinema Tropes</h4>
+                                    <p class="text-xs text-zinc-400 mt-1">Refusing roles that reduce women to passive decorative objects, prioritizing three-dimensional narrative agency.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-charcoal-950 border border-zinc-800">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Mental Health Advocacy</h4>
+                                    <p class="text-xs text-zinc-400 mt-1">Destigmatizing depression and anxiety by publicly sharing personal experiences to empower youth across Bengal.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-charcoal-950 border border-zinc-800">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm">Atheism to Spiritual Humanism</h4>
+                                    <p class="text-xs text-zinc-400 mt-1">Evolving from rigid secular skepticism to a compassionate, nature-centered spiritual devotion to kindness and life.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Graphic Quote Banner -->
+                    <div class="lg:col-span-6">
+                        <div class="relative glass-card p-8 sm:p-12 rounded-3xl border border-crimson-800/40 text-center space-y-6">
+                            <div class="w-16 h-16 rounded-full bg-crimson-900/50 border border-crimson-600 mx-auto flex items-center justify-center text-gold-400">
+                                <i data-lucide="scale" class="w-8 h-8"></i>
+                            </div>
+
+                            <blockquote class="font-serif italic text-xl sm:text-2xl text-white">
+                                "Liberalism is not a fashion statement or a Twitter bio. It is the real-world courage to stand up for someone whose choices and beliefs you may not share."
+                            </blockquote>
+
+                            <div class="pt-4 border-t border-zinc-800 text-xs font-mono text-gold-400 tracking-widest uppercase">
+                                Parno Mittra on Universal Human Dignity
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. PHILANTHROPY, HUMANITY & CULTURAL LEGACY -->
+        <section id="philanthropy" class="py-24 bg-charcoal-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center space-y-4 mb-16">
+                    <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">Community & Altruism</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Philanthropy & Cultural Heritage</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-gold-500 to-crimson-600 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="glass-card p-8 rounded-2xl space-y-4">
+                        <i data-lucide="heart-handshake" class="w-10 h-10 text-gold-400"></i>
+                        <h3 class="font-serif text-xl font-bold text-white">Pandemic Relief & Grassroots Support</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Active on the frontlines during crises in West Bengal, organizing food distribution, medical supplies, and supporting destitute artist guilds during difficult times.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl space-y-4">
+                        <i data-lucide="tree-pine" class="w-10 h-10 text-gold-400"></i>
+                        <h3 class="font-serif text-xl font-bold text-white">Environmental & Animal Welfare</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Passionate advocate for stray animal protection, urban green initiatives, and preserving West Bengal's rural wetland ecosystems against unsustainable development.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl space-y-4">
+                        <i data-lucide="palette" class="w-10 h-10 text-gold-400"></i>
+                        <h3 class="font-serif text-xl font-bold text-white">Preserving Bengali Folk Arts</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Promoting traditional Bengali theater, rural artisans, and independent filmmakers, ensuring that regional heritage thrives alongside modern digital cinema.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 8. INTERACTIVE QUOTE & THOUGHT GENERATOR -->
+        <section id="quote-generator" class="py-20 bg-gradient-to-b from-charcoal-900 to-charcoal-950 border-t border-zinc-800">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-8">
+                
+                <span class="text-gold-400 text-xs font-mono tracking-widest uppercase">Interactive Thought Cosmos</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Parno's Wisdom Generator</h2>
+                
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-gold-500/30 relative min-h-[220px] flex flex-col justify-center items-center shadow-2xl">
+                    <p id="quote-text" class="font-serif italic text-xl sm:text-2xl text-gold-200 transition-opacity duration-300">
+                        "You don't just show; telling your smartness is through the depth of your mind and thoughts."
+                    </p>
+                    <span id="quote-topic" class="mt-4 text-xs font-mono uppercase tracking-widest text-zinc-400">
+                        — On True Intelligence & Mind
+                    </span>
+                </div>
+
+                <button id="next-quote-btn" class="px-8 py-3 rounded-full bg-gold-500 hover:bg-gold-400 text-charcoal-950 font-bold uppercase tracking-wider text-xs transition-all transform hover:scale-105 inline-flex items-center gap-2 shadow-lg shadow-gold-500/20">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i> Generate Reflection
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal-950 border-t border-zinc-800/80 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gold-600 flex items-center justify-center font-serif text-white font-bold text-sm">
+                    PM
+                </div>
+                <span class="font-serif font-bold text-white text-lg tracking-wider">PARNO MITTRA ARCHIVE</span>
+            </div>
+
+            <p class="text-xs text-zinc-400 text-center">
+                Dedicated to artistic excellence, humanism, and the cinematic heritage of Bengali Cinema.
+            </p>
+
+            <div class="flex items-center gap-4 text-zinc-400 text-xs">
+                <a href="#hero" class="hover:text-gold-400 transition-colors">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FEATURED FILM MODAL POPUP -->
+    <div id="film-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-gold-500/30 overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button id="modal-close-btn" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-charcoal-900/80 text-zinc-300 hover:text-white flex items-center justify-center border border-zinc-700">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-content" class="p-6 sm:p-8 space-y-6">
+                <!-- Dynamically filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Store: 5 Featured Films
+        const featuredFilms = [
+            {
+                id: 'ranjana',
+                title: 'Ranjana Ami Ar Ashbona',
+                year: '2011',
+                director: 'Anjan Dutt',
+                role: 'Ranjana',
+                genre: 'Musical Drama / Rock Cinema',
+                image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
+                acclaim: 'Won 3 National Film Awards',
+                summary: 'Parno\'s explosive debut character Ranjana challenged conventional film heroines, giving birth to a new era of realistic, music-driven Bengali indie cinema.',
+                philosophyTheme: 'Raw youth ambition vs. artistic commercialization.'
+            },
+            {
+                id: 'chotushkone',
+                title: 'Chotushkone',
+                year: '2014',
+                director: 'Srijit Mukherji',
+                role: 'Nandita / Character Ensemble',
+                genre: 'Thriller / Meta-Cinema',
+                image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80',
+                acclaim: 'National Award Winner & Blockbuster',
+                summary: 'Four directors meet to make a thriller film consisting of four short stories regarding death. Parno holds her ground effortlessly alongside cinema legends.',
+                philosophyTheme: 'The thin line between artistic creation and mortal fate.'
+            },
+            {
+                id: 'ahare-mon',
+                title: 'Ahare Mon',
+                year: '2018',
+                director: 'Pratim D. Gupta',
+                role: 'Suhini',
+                genre: 'Romantic Drama / Slice of Life',
+                image: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80',
+                acclaim: 'Critically Acclaimed Ensemble',
+                summary: 'A heartwarming story about people who fall in love outside traditional societal norms. Parno\'s portrayal of Suhini radiated emotional warmth and nuance.',
+                philosophyTheme: 'Love as an architecture of human empathy.'
+            },
+            {
+                id: 'apur-panchali',
+                title: 'Apur Panchali',
+                year: '2013',
+                director: 'Kaushik Ganguly',
+                role: 'Ashima',
+                genre: 'Biographical Drama',
+                image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80',
+                acclaim: 'Best Director (IFFI Goa)',
+                summary: 'Depicting the real life of Subir Banerjee (who played Apu in Satyajit Ray\'s Pather Panchali). Parno portrayed his wife with vintage grace and profound tragedy.',
+                philosophyTheme: 'Nostalgia, innocence, and the tragedy of lost time.'
+            },
+            {
+                id: 'rajkahini',
+                title: 'Rajkahini',
+                year: '2015',
+                director: 'Srijit Mukherji',
+                role: 'Supta',
+                genre: 'Historical Period Drama',
+                image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80',
+                acclaim: 'Widespread Critical Acclaim',
+                summary: 'Set during the 1947 Partition of Bengal, Parno played one of the eleven fiercely independent women protecting their sanctuary against male geopolitical violence.',
+                philosophyTheme: 'Feminine defiance against state-sponsored chaos.'
+            }
+        ];
+
+        // Data Store: Full Filmography List
+        const fullFilmography = [
+            { title: 'Ranjana Ami Ar Ashbona', year: '2011', type: 'Feature Film', director: 'Anjan Dutt', role: 'Ranjana' },
+            { title: 'Bedroom', year: '2012', type: 'Feature Film', director: 'Mainak Bhaumik', role: 'Ritika' },
+            { title: 'Dutta Vs Dutta', year: '2012', type: 'Feature Film', director: 'Anjan Dutt', role: 'Nandini' },
+            { title: 'Apur Panchali', year: '2013', type: 'Feature Film', director: 'Kaushik Ganguly', role: 'Ashima' },
+            { title: 'Chotushkone', year: '2014', type: 'Feature Film', director: 'Srijit Mukherji', role: 'Nandita' },
+            { title: 'Glamour', year: '2015', type: 'Feature Film', director: 'Mahua Chakraborty', role: 'Riya' },
+            { title: 'Rajkahini', year: '2015', type: 'Feature Film', director: 'Srijit Mukherji', role: 'Supta' },
+            { title: 'Saheb Bibi Golaam', year: '2016', type: 'Feature Film', director: 'Pratim D. Gupta', role: 'Rumi' },
+            { title: 'Machher Jhol', year: '2017', type: 'Feature Film', director: 'Pratim D. Gupta', role: 'Sreela' },
+            { title: 'Ahare Mon', year: '2018', type: 'Feature Film', director: 'Pratim D. Gupta', role: 'Suhini' },
+            { title: 'Rajlokhi O Srikanto', year: '2019', type: 'Feature Film', director: 'Pradipta Bhattacharyya', role: 'Rajlokhi' },
+            { title: 'Dharmajuddha', year: '2022', type: 'Feature Film', director: 'Raj Chakraborty', role: 'Shabnam' },
+            { title: 'Khela', year: '2008', type: 'Television', director: 'Ravi Ojha Production', role: 'Lead Role' },
+            { title: 'Bou Kotha Kao', year: '2009', type: 'Television', director: 'Star Jalsha', role: 'Neera' },
+            { title: 'Shei Je Holo Ekdin', year: '2020', type: 'Web Series', director: 'OTT Platform', role: 'Protagonist' },
+            { title: 'Kolkata Underground', year: '2023', type: 'Web Series', director: 'Indie Web', role: 'Investigator' }
+        ];
+
+        // Data Store: Wisdom Quotes
+        const quotesList = [
+            { quote: "You don't just show; telling your smartness is through the depth of your mind and thoughts.", topic: "On True Intelligence" },
+            { quote: "Art shouldn't shy away from our messy mortality. Perfect people belong in fairy tales; cinema belongs to human beings.", topic: "On Film Realism" },
+            { quote: "Body shaming is a reflection of a society starving for intellectual substance. Wear your truth unapologetically.", topic: "On Self-Worth & Positivity" },
+            { quote: "Liberalism is active empathy. It is the ability to listen to someone with whom you completely disagree without losing your humanity.", topic: "On Global Liberalism" },
+            { quote: "Kolkata is my anchor. In its coffee houses, rain, and ancient architecture, I find the inspiration to stay grounded.", topic: "On Heritage & Roots" },
+            { quote: "The mind and body are constantly in a two-state conflict. Acting allows me to find harmony between physical presence and quiet soul.", topic: "On Acting Craft" }
+        ];
+
+        // DOM Element Initializations & Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderFeaturedFilms();
+            renderFilmography('all');
+            setupMobileMenu();
+            setupFilterButtons();
+            setupModalEvents();
+            setupQuoteGenerator();
+        });
+
+        // Render 5 Featured Film Cards
+        function renderFeaturedFilms() {
+            const container = document.getElementById('featured-films-container');
+            if (!container) return;
+
+            container.innerHTML = featuredFilms.map(film => `
+                <div class="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between border border-zinc-800" onclick="openFilmModal('${film.id}')">
+                    <div class="relative h-64 overflow-hidden bg-charcoal-900">
+                        <img src="${film.image}" alt="${film.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-85 group-hover:opacity-100" onerror="this.src='https://placehold.co/400x600/18181b/fbbf24?text=${encodeURIComponent(film.title)}'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-3 left-3 px-2 py-1 rounded bg-gold-500/90 text-charcoal-950 font-bold text-xs font-mono">
+                            ${film.year}
+                        </span>
+                    </div>
+                    <div class="p-5 space-y-2 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif font-bold text-white text-lg group-hover:text-gold-300 transition-colors line-clamp-1">${film.title}</h3>
+                            <p class="text-xs text-gold-400 font-medium">Dir: ${film.director}</p>
+                            <p class="text-xs text-zinc-400 mt-2 line-clamp-2">${film.summary}</p>
+                        </div>
+                        <div class="pt-3 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
+                            <span>Role: <strong class="text-white font-normal">${film.role}</strong></span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-gold-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // Render Filterable Filmography Grid
+        function renderFilmography(filterCategory) {
+            const container = document.getElementById('full-filmography-grid');
+            if (!container) return;
+
+            const filteredData = filterCategory === 'all' 
+                ? fullFilmography 
+                : fullFilmography.filter(item => item.type === filterCategory);
+
+            container.innerHTML = filteredData.map(item => `
+                <div class="glass-card p-5 rounded-2xl space-y-3 border border-zinc-800/80">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 rounded-full bg-zinc-800 text-gold-300 text-[10px] font-mono uppercase tracking-wider">
+                            ${item.type}
+                        </span>
+                        <span class="text-xs font-mono text-zinc-500">${item.year}</span>
+                    </div>
+                    <h4 class="font-serif font-bold text-white text-lg">${item.title}</h4>
+                    <div class="text-xs space-y-1 text-zinc-400">
+                        <p><span class="text-zinc-500">Director:</span> ${item.director}</p>
+                        <p><span class="text-zinc-500">Role / Character:</span> <span class="text-gold-200">${item.role}</span></p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Buttons Functionality
+        function setupFilterButtons() {
+            const buttons = document.querySelectorAll('.film-filter-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-gold-500', 'text-charcoal-950', 'shadow-lg');
+                        b.classList.add('bg-zinc-800', 'text-zinc-300');
+                    });
+                    btn.classList.remove('bg-zinc-800', 'text-zinc-300');
+                    btn.classList.add('bg-gold-500', 'text-charcoal-950', 'shadow-lg');
+
+                    const filter = btn.getAttribute('data-filter');
+                    renderFilmography(filter);
+                });
+            });
+        }
+
+        // Modal Functionality for Featured Films
+        function openFilmModal(filmId) {
+            const film = featuredFilms.find(f => f.id === filmId);
+            if (!film) return;
+
+            const modal = document.getElementById('film-modal');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="relative h-56 rounded-2xl overflow-hidden bg-charcoal-900 mb-6">
+                    <img src="${film.image}" alt="${film.title}" class="w-full h-full object-cover opacity-80" onerror="this.src='https://placehold.co/800x400/18181b/fbbf24?text=${encodeURIComponent(film.title)}'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 z-10">
+                        <span class="px-2.5 py-1 rounded bg-gold-500 text-charcoal-950 font-bold text-xs uppercase font-mono">${film.year} • ${film.genre}</span>
+                        <h2 class="font-serif text-3xl text-white font-bold mt-1">${film.title}</h2>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-zinc-300">
+                    <div class="grid grid-cols-2 gap-4 p-4 rounded-xl bg-charcoal-950 border border-zinc-800">
+                        <div>
+                            <span class="text-xs text-zinc-500 uppercase block font-mono">Director</span>
+                            <span class="text-white font-semibold">${film.director}</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-zinc-500 uppercase block font-mono">Parno's Character</span>
+                            <span class="text-gold-400 font-semibold">${film.role}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-mono uppercase text-gold-400 tracking-wider mb-1">Critical Recognition</h4>
+                        <p class="text-white font-medium">${film.acclaim}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-mono uppercase text-gold-400 tracking-wider mb-1">Character Synopsis & Narrative</h4>
+                        <p class="leading-relaxed font-light">${film.summary}</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-gold-500/10 border border-gold-500/20">
+                        <h4 class="text-xs font-mono uppercase text-gold-400 tracking-wider mb-1">Filmic & Philosophical Theme</h4>
+                        <p class="font-serif italic text-gold-200">"${film.philosophyTheme}"</p>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function setupModalEvents() {
+            const modal = document.getElementById('film-modal');
+            const closeBtn = document.getElementById('modal-close-btn');
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Mobile Menu Drawer Logic
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Interactive Quote Generator Logic
+        function setupQuoteGenerator() {
+            const quoteText = document.getElementById('quote-text');
+            const quoteTopic = document.getElementById('quote-topic');
+            const btn = document.getElementById('next-quote-btn');
+            let index = 0;
+
+            btn.addEventListener('click', () => {
+                quoteText.classList.add('opacity-0');
+                
+                setTimeout(() => {
+                    index = (index + 1) % quotesList.length;
+                    quoteText.textContent = `"${quotesList[index].quote}"`;
+                    quoteTopic.textContent = `— ${quotesList[index].topic}`;
+                    quoteText.classList.remove('opacity-0');
+                }, 200);
+            });
+        }
+    </script>
+</body>
+</html>
